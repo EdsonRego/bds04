@@ -26,7 +26,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] CLIENT_GET = { "/events/**" , "/cities/**"};
 
-	private static final String[] CLIENT_POST = { "/events/**" , "/cities/**"};
+	private static final String[] CLIENT_POST = { "/events/**"};
 
 	
 	@Override
@@ -44,7 +44,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.POST, CLIENT_GET).hasAnyRole("CLIENT" , "ADMIN")
+		.antMatchers(HttpMethod.GET, CLIENT_GET).hasAnyRole("CLIENT" , "ADMIN")
 		.antMatchers(HttpMethod.POST, CLIENT_POST).hasAnyRole("CLIENT" , "ADMIN")
 		.anyRequest().hasAnyRole("ADMIN");
 	}
